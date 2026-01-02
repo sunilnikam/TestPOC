@@ -15,7 +15,8 @@ namespace TestPOC
             //propertyPattarn.TestPropertyPattarn();
             //CancellationTokenTest.TestCancellationToken().GetAwaiter().GetResult();
             FileReadInBatch fileReadInBatch = new FileReadInBatch();
-            Console.WriteLine($"Population of Seoul is {fileReadInBatch.GetPopulation("Seoul")}");
+            var capital = "Delhi";
+            Console.WriteLine($"Population of {capital} is {fileReadInBatch.GetPopulation(capital)}");
 
 
             Console.WriteLine($"{Environment.NewLine}Hit enter to close!!");
