@@ -1,0 +1,29 @@
+﻿
+
+Clean Architecture is an approach to software design proposed by Robert C. Martin (Uncle Bob) that 
+emphasizes separating concerns and creating systems that are 
+	independent of frameworks, databases, and UI 
+
+As you can see, there are four layers, from the innermost to the outermost:
+	Entities: They represent the essential business objects or concepts
+	Use Cases (or Interactors): Use cases represent the application's behavior and define the actions that can be performed within the system
+	Interface Adapters: They act as the intermediary between the inner layers (Entities and Use Cases) and the outer layers (Frameworks and Drivers)
+	Frameworks and Drivers: The outmost layer consists of the external frameworks, tools, and devices such as the database, web framework, UI, etc.
+
+The dependency rule
+	This rule says that source code dependencies can only point inwards. 
+	Nothing in an inner circle can know anything at all about something in an outer circle.
+
+___________________________
+
+This design philosophy aims to produce software that is flexible, testable, and maintainable
+
+The Layers of Clean Architecture
+The architecture is visualized as a set of concentric circles, with the core policies and business rules at the center, and implementation details on the outer layers [1]. The four main layers are: 
+Entities: These are the business rules of the application. Entities encapsulate the most general and high-level rules, which can be shared by many different applications within an enterprise. They should have no knowledge of the outer circles [1].
+Use Cases: This layer contains the application-specific business rules. It orchestrates the flow of data to and from the Entities and directs them to use their business rules to achieve the application's goals [1].
+Interface Adapters: This layer is a set of adapters that convert data from the format most convenient for the Use Cases and Entities into the format most convenient for external agents like the Database or the Web [1]. This includes presenters, controllers, and gateways [1].
+Frameworks & Drivers: This outermost layer consists of the details. This is where the database, the web framework, UI code, and other external tools live. The code in this layer glues the system together but contains little high-level logic [1]. 
+The Dependency Rule
+The core principle that governs the layers is the Dependency Rule. It states that source code dependencies can only point inward [1]. 
+No code in an inner circle should know anything about the code in an outer circle. For example, the Use Case layer can depend on the Entity layer, but the Entity layer cannot depend on the Use Case layer [1]. This rule ensures that changes in external details (like swapping a database for another) do not affect the core business logic [1]. This decoupling makes the core system easier to test and more resilient to changes in the outer layers [1]. 

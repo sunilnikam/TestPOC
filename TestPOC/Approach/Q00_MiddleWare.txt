@@ -1,0 +1,30 @@
+﻿The typical and expected sequence for the built-in middlewares in a standard .NET Core application is:
+
+Exception/Error Handling
+	app.UseDeveloperExceptionPage() / app.UseExceptionHandler(): Should run first so it can catch exceptions from all subsequent middlewares.
+
+HTTPS Redirection
+	app.UseHttpsRedirection(): Should be early to ensure all traffic is secure from the start.
+
+Static Files
+	app.UseStaticFiles(): If the request is for a static file (image, CSS, etc.), this middleware handles it immediately and terminates the pipeline efficiently, preventing unnecessary processing by later components like routing or authentication.
+
+Cookie Policy
+	app.UseCookiePolicy(): Necessary early on if you need to check for cookie consent before processing the main request logic.
+Routing
+	app.UseRouting(): This must run before authentication/authorization, as it matches the URL to an endpoint, which determines the policies that need to be applied.
+CORS
+	app.UseCors(): The CORS policy should be applied after routing has identified the endpoint but before authorization checks are made.
+Authentication
+	app.UseAuthentication(): Identifies who the user is. This must happen before authorization.
+Authorization
+	app.UseAuthorization(): Checks if the identified user is allowed to access the resource.
+Session/Custom Logic
+	app.UseSession(): Handles session state management.
+Other custom middlewares often fit here.
+Endpoint Execution (Map Controllers/Razor Pages/Minimal APIs)
+	app.MapControllers(), app.MapRazorPages(), app.MapBlazorHub(), or the standard app.UseEndpoints() followed by app.Use... methods. This is where the application logic finally runs.
+Response Compression/Caching
+
+	app.UseResponseCompression() or app.UseResponseCaching(): These should ideally run later in the pipeline, wrapping the endpoint execution to compress/cache the final response body just before it is sent back to the client.
+For an official visual representation and detailed explanation of the pipeline flow, refer to the Microsoft Learn documentation on ASP.NET Core Middleware.

@@ -1,0 +1,63 @@
+﻿Static vs Singleton
+When to Use Which
+Use a static class for:
+Collections of utility or helper methods that perform functions and do not require maintaining state, such as the built-in System.Math class or a TemperatureConverter utility.
+Stateless operations where you want simplicity and performance, and the functionality is not expected to change or need mocking for testing.
+Use a singleton for:
+Scenarios where exactly one instance of a class needs to coordinate actions across the application and maintain a shared state, such as logging services, configuration managers, or managing a single database connection pool.
+When you need an object with a single instance that must be passed to other methods as a parameter or require object-oriented capabilities like inheritance and interfaces. 
+
+_____________________________________________
+
+Key differences, use cases, and implementation examples.
+Static Class:
+	- A static class cannot be instantiated and can only contain static members (methods, properties, fields).
+	- It is used for grouping related utility functions or constants.
+	- Example:
+	  ```csharp
+	  public static class MathUtilities
+	  {
+		  public static int Add(int a, int b)
+		  {
+			  return a + b;
+		  }
+	  }
+
+	  // Usage:
+	  int sum = MathUtilities.Add(5, 10);
+Singleton Pattern:
+	- A singleton class allows only one instance of itself to be created and provides a global point of access to that instance.
+	- It is used when exactly one object is needed to coordinate actions across the system.
+	- Example:
+	  ```csharp
+	  public class ConfigurationManager
+	  {
+		  private static ConfigurationManager _instance;
+		  private static readonly object _lock = new object();
+		  // Private constructor to prevent instantiation
+		  private ConfigurationManager() { }
+		  public static ConfigurationManager Instance
+		  {
+			  get
+			  {
+				  lock (_lock)
+				  {
+					  if (_instance == null)
+					  {
+						  _instance = new ConfigurationManager();
+					  }
+					  return _instance;
+				  }
+			  }
+		  }
+		  public string GetConfigValue(string key)
+		  {
+			  // Implementation to retrieve configuration value
+			  return "SomeValue";
+		  }
+	  }
+	  // Usage:
+	  var configValue = ConfigurationManager.Instance.GetConfigValue("SomeKey");
+	  ```
+
+

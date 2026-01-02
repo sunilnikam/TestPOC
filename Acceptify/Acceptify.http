@@ -1,0 +1,6 @@
+@Acceptify_HostAddress = http://localhost:5003
+
+GET {{Acceptify_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

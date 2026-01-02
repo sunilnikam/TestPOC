@@ -1,0 +1,68 @@
+﻿struct vs class — differences, when to choose a struct, how to instantiate a struct.
+
+public struct Point
+{
+    public int X;
+    public int Y;
+
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+When to Choose a Struct
+Choose a struct when the type meets most of the following criteria: 
+	It logically represents a single value, similar to primitive types (e.g., coordinates, colors, key-value pairs, a complex number).
+	It has an instance size under 16 bytes (a common guideline to avoid expensive copying overhead).
+	It is immutable (its state cannot be changed after creation), to prevent confusing behavior due to implicit copying.
+	It is short-lived and frequently created or destroyed.
+You need array elements to be stored contiguously in memory for performance (e.g., in game programming for vertices). 
+
+**For anything more complex (business entities with complex logic, objects that need to be shared, large data structures, or types requiring inheritance), a class is the standard choice. 
+
+
+In C#, structs and classes are both used to define custom data types, but they have some key differences:
+1. Value Type vs Reference Type:
+   - Structs are value types, which means they are stored on the stack and hold the actual data. -- IMMUTABLE
+   - Classes are reference types, which means they are stored on the heap and hold a reference to the data.
+2. Memory Allocation:	
+   - Structs are allocated on the stack, which can lead to better performance for small data types.
+   - Classes are allocated on the heap, which can lead to more overhead due to garbage collection.
+3. Default Constructor:
+   - Structs cannot have a default (parameterless) constructor. They are automatically initialized to their default values.
+   - Classes can have default constructors, which can be explicitly defined.
+4. Inheritance:
+   - Structs do not support inheritance (except for implementing interfaces).
+   - Classes support inheritance, allowing for polymorphism and code reuse.
+When to choose a struct:
+	- Use a struct when you have a small, simple data type that represents a single value, such as a point in 2D space (e.g., `Point` with `X` and `Y` coordinates).
+	- Use a struct when you want to avoid the overhead of heap allocation and garbage collection for small objects.
+	- Use a struct when you want to ensure that the data is immutable (unchangeable) after creation.
+How to instantiate a struct:
+	You can instantiate a struct in C# using the following methods:
+		1. Using the default constructor (which initializes fields to their default values):
+			Point p1 = new Point(); // X and Y will be 0
+
+		2. Using a parameterized constructor (if defined):
+			Point p2 = new Point(10, 20); // X will be 10, Y will be 20
+
+		3. Using object initializer syntax:
+			Point p3 = new Point { X = 5, Y = 15 }; // X will be 5, Y will be 15
+
+		Example of a struct definition and instantiation:
+		struct Point
+		{
+			public int X;
+			public int Y;
+			public Point(int x, int y)
+			{
+				X = x;
+				Y = y;
+			}
+		}
+		// Instantiating the struct
+		Point p = new Point(10, 20);
+		Console.WriteLine($"Point coordinates: ({p.X}, {p.Y})");
+
