@@ -22,6 +22,7 @@ namespace TestPOC.Concept
         {
             if (capitals.TryGetValue(city, out int population))
             {
+                //return Convert.ToInt32(population.ToString().AsSpan(0,3).ToString());
                 return population;
             }
             else
