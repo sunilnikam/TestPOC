@@ -12,6 +12,7 @@ namespace TestMVC.Controllers
         public IActionResult Index()
         {
             return View();
+            // Updated so for autobuild to fire
         }
 
         public IActionResult Privacy()
