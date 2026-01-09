@@ -8,8 +8,7 @@ namespace TestMVC.Controllers
 {
     public class HomeController : Controller
     {
-        //[LogActionFilter]
-        [Authorize]
+        [LogActionFilter]
         public IActionResult Index()
         {
             return View();
