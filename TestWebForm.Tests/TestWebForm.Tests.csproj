@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestWebApp\TestWebApp.csproj">
+    <ProjectReference Include="..\TestWebForm\TestWebForm.csproj">
       <Project>{6FB844BE-F47F-433B-BE19-474A1112EE2B}</Project>
-      <Name>TestWebApp</Name>
+      <Name>TestWebForm</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
